@@ -2,7 +2,7 @@
 
 MERN Assignment 7 - a simple Todo List built with Node.js, Express and EJS.
 
-**Deploy link:** (add your Render link here after deploying)
+**Deploy link:** https://todo-list-ejs-r50d.onrender.com
 
 ## Features
 
@@ -39,5 +39,3 @@ Then open http://localhost:3000
 
 - Build command: `npm install`
 - Start command: `node index.js`
-
-Deploy link: https://todo-list-ejs-r50d.onrender.com
