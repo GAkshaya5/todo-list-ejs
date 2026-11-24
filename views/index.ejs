@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+
+<form action="/todos" method="POST" class="add-form" id="addForm">
+  <input type="text" name="text" id="todoText" placeholder="What do you need to do?" autocomplete="off">
+  <select name="priority" aria-label="Priority">
+    <% priorities.forEach(function(p) { %>
+      <option value="<%= p %>" <%= p === 'Medium' ? 'selected' : '' %>><%= p %></option>
+    <% }) %>
+  </select>
+  <button type="submit" class="btn btn-main">Add</button>
+</form>
+
+<form action="/" method="GET" class="filter-form">
+  <label for="priorityFilter">Show:</label>
+  <select name="priority" id="priorityFilter" onchange="this.form.submit()">
+    <option value="All" <%= selected === 'All' ? 'selected' : '' %>>All priorities</option>
+    <% priorities.forEach(function(p) { %>
+      <option value="<%= p %>" <%= selected === p ? 'selected' : '' %>><%= p %></option>
+    <% }) %>
+  </select>
+  <noscript><button type="submit" class="btn">Apply</button></noscript>
+  <span class="count">Showing <%= todos.length %> of <%= total %></span>
+</form>
+
+<% if (todos.length === 0) { %>
+  <p class="empty">
+    <% if (total === 0) { %>
+      Nothing here yet. Type a task above and press Add.
+    <% } else { %>
+      No <%= selected.toLowerCase() %> priority tasks right now.
+    <% } %>
+  </p>
+<% } else { %>
+  <ul class="todo-list">
+    <% todos.forEach(function(todo) { %>
+      <li class="todo-item">
+        <span class="badge badge-<%= todo.priority.toLowerCase() %>"><%= todo.priority %></span>
+        <span class="todo-text"><%= todo.text %></span>
+        <div class="actions">
+          <a href="/todos/<%= todo.id %>/edit" class="btn">Edit</a>
+          <form action="/todos/<%= todo.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this task?');">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<% if (error === 'empty') { %>
+  <script>alert("Please type a task before adding it.");</script>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<h2 class="page-title">Edit task</h2>
+
+<form action="/todos/<%= todo.id %>?_method=PUT" method="POST" class="add-form" id="editForm">
+  <input type="text" name="text" id="todoText" value="<%= todo.text %>" autocomplete="off">
+  <select name="priority" aria-label="Priority">
+    <% priorities.forEach(function(p) { %>
+      <option value="<%= p %>" <%= todo.priority === p ? 'selected' : '' %>><%= p %></option>
+    <% }) %>
+  </select>
+  <button type="submit" class="btn btn-main">Save changes</button>
+</form>
+
+<p><a href="/" class="back-link">Back to list</a></p>
+
+<% if (error === 'empty') { %>
+  <script>alert("The task can't be empty.");</script>
+<% } %>
+
+<%- include('partials/footer') %>
