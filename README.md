@@ -39,3 +39,5 @@ Then open http://localhost:3000
 
 - Build command: `npm install`
 - Start command: `node index.js`
+
+Deploy link: https://todo-list-ejs-r50d.onrender.com
